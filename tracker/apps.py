@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class CalculatorConfig(AppConfig):
+class TrackerConfig(AppConfig):
     name = 'tracker'
