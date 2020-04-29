@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static calculator_tags %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <!--begin:: Widgets/Sale Reports-->
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">All Stories</h3>
+                    </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions">
+                                <a href="{% url "create_story" %}" class="btn btn-primary" id="createStory">Create Story</a>
+                                <a href="{% url "add_developer" %}" class="btn btn-primary" id="addDeveloper">Add Developer</a>
+                                <a href="{% url "create_sprint" %}" class="btn btn-primary" id="addSprint">Create Sprint</a>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="kt-portlet__body">
+
+                    <!--begin::Section-->
+                    <div class="kt-section">
+                        <div class="kt-section__content">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Story Title</th>
+                                    <th class="text-center">Total Tasks</th>
+                                    <th class="text-center">Estimated Story Time</th>
+                                    <th class="text-center">Real Story Time</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for story in stories %}
+                                    <tr>
+                                        <th scope="row" class="text-center">{{ forloop.counter }}</th>
+                                        <td>{{ story.story_name }}</td>
+                                        <td class="text-center">{{ story.total_tasks }}</td>
+                                        <td class="text-center">{{ story.estimated_story_time|duration }}</td>
+                                        <td class="text-center">{{ story.total_tasks_time|duration }}</td>
+                                        <td class="text-center">
+                                            <a href="{% url "story_view" pk=story.pk %}" class="story-view-button"><span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill kt-badge--rounded">View</span></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% include "includes/paginator.html" %}
+                    </div>
+
+                    <!--end::Section-->
+                </div>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end:: Widgets/Sale Reports-->
+        </div>
+    </div>
+{% endblock %}

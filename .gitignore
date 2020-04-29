@@ -1,0 +1,9 @@
+.idea/
+*.pyc
+media/
+!static/assets/media/
+outputs/
+staticfiles/
+db.sqlite3
+geckodriver.log
+.coverage

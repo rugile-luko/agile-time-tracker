@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static calculator_tags %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <!--begin:: Widgets/Sale Reports-->
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">Time Estimation</h3>
+                    </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions">
+                                <a href="{% url 'create_time' pk=task.story.pk task_pk=task.pk %}" id="createTime" class="btn btn-danger btn-sm btn-icon btn-icon-md">
+                                    <i class="flaticon2-add-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="kt-portlet__body">
+
+                    <!--begin::Section-->
+                    <div class="kt-section">
+                        <div class="kt-section__content">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Developer</th>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Time Spent in Hours</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for hour in hours_spent %}
+                                    <tr>
+                                        <th scope="row" class="text-center">{{ forloop.counter }}</th>
+                                        <td>{{ hour.task.developer.developer_first_name }} {{ hour.task.developer.developer_last_name }}</td>
+                                        <td>{{ hour.date|date:"Y-m-d" }}</td>
+                                        <td class="text-center">{{ hour.time_spent|duration }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!--end::Section-->
+                </div>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end:: Widgets/Sale Reports-->
+        </div>
+    </div>
+{% endblock %}

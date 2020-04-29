@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static calculator_tags %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <!--begin:: Widgets/Sale Reports-->
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">Tasks</h3>
+                    </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions">
+                                <a href="{% url 'create_task' pk=story.pk %}" id="createTask" class="btn btn-danger btn-sm btn-icon btn-icon-md">
+                                    <i class="flaticon2-add-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="kt-portlet__body">
+
+                    <!--begin::Section-->
+                    <div class="kt-section">
+                        <div class="kt-section__content">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Task Name</th>
+                                    <th class="text-center">Developer</th>
+                                    <th class="text-center">Sprint</th>
+                                    <th class="text-center">Estimated Time</th>
+                                    <th class="text-center">Total Time Spent</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for task in tasks %}
+                                    <tr>
+                                        <th scope="row" class="text-center">{{ forloop.counter }}</th>
+                                        <td>{{ task.task_name }}</td>
+                                        <td>{{ task.developer }}</td>
+                                        <td class="text-center">{{ task.sprint }}</td>
+                                        <td class="text-center">{{ task.time_estimated|duration }}</td>
+                                        <td class="text-center">{{ task.total_hours|duration }}</td>
+                                        <td class="text-center">
+                                                <a href="{% url 'task_view' pk=story.pk task_pk=task.pk %}" class="story-task-view-button"><span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">View</span></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% include "includes/paginator.html" with stories=tasks %}
+                    </div>
+
+                    <!--end::Section-->
+                </div>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end:: Widgets/Sale Reports-->
+        </div>
+    </div>
+{% endblock %}
