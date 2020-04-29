@@ -19,8 +19,9 @@ source env/bin/activate                     // for OS X users
 python -m pip install -r requirements.txt
 ```
 
-After successful installation you can start the server:
+After successful installation you can migrate and start the server:
 ```
+python manage.py migrate
 python manage.py runserver
 ```
 
@@ -33,7 +34,9 @@ FireFox users need a geckodriver. In this case, geckodriver was used and it can 
 https://github.com/mozilla/geckodriver/releases
 ```
 Both of these categories have different tags, so it is possible
-to run only unit, only integration, or all of the tests:
+to run only unit, only integration, or all of the tests.   
+
+**Note: to run the integration tests you need to have the server running.**
 
 ```
 coverage run manage.py test --tag=integration   // only integration tests

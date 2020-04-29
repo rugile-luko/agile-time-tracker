@@ -46,6 +46,10 @@ class Task(models.Model):
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
     sprint = models.ForeignKey(Sprint, on_delete=models.CASCADE)
     time_estimated = models.DurationField()
+    datetime_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-datetime_added']
 
     def total_hours(self):
         total_hours = datetime.timedelta(0, 0)
