@@ -1,7 +1,7 @@
 .idea/
 *.pyc
 media/
-!static/assets/media/
+!static/metronic_assets/media/
 outputs/
 staticfiles/
 db.sqlite3
